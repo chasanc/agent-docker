@@ -1,0 +1,17 @@
+[Unit]
+Description=Nightly Claude Code agent container run
+After=docker.service network-online.target
+Requires=docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# These two are placeholders, filled in by `install-docker-ce.sh --with-timer`
+# (or by hand): the user that owns the checkout and is in the docker group,
+# and this repo's absolute path.
+User=REPLACE_WITH_YOUR_USER
+WorkingDirectory=/absolute/path/to/agent-docker
+ExecStart=/absolute/path/to/agent-docker/run-nightly.sh
+# Covers a from-scratch image build plus a real implementation task
+# (implement ticket + create PR + self-review can run for hours).
+TimeoutStartSec=14400

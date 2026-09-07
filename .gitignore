@@ -1,0 +1,11 @@
+.env
+workspace/
+logs/
+plans/
+.run.lock
+manual-plans/
+task-archive/
+next-task.md
+next-task.env
+task-queue/*.md
+task-queue/*.env

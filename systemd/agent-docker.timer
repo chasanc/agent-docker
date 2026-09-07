@@ -1,0 +1,14 @@
+[Unit]
+Description=Nightly schedule for the Claude Code agent container
+
+[Timer]
+# Fires at 23:00 local time. The service is a no-op unless a task plan is
+# armed (next-task.md exists) — see run-nightly.sh. If the machine was
+# off/asleep at 23:00, Persistent=true runs a still-armed task as soon as
+# the machine is next on.
+OnCalendar=*-*-* 23:00:00
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

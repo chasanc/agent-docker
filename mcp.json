@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "jira": {
+      "command": "mcp-atlassian",
+      "env": {
+        "JIRA_URL": "${JIRA_BASE_URL}",
+        "JIRA_USERNAME": "${JIRA_EMAIL}",
+        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}"
+      }
+    },
+    "linear": {
+      "command": "mcp-linear",
+      "env": {
+        "LINEAR_API_TOKEN": "${LINEAR_API_KEY}"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+Read Jira ticket ABC-123 using the jira MCP server — it contains the full
+spec and acceptance criteria.
+
+Clone the repo, removing any leftover from a previous run first:
+`rm -rf /workspace/example-service && gh repo clone your-org/example-service /workspace/example-service`
+(replace the owner/repo). cd into it — the clone leaves you on the repo's
+default branch, whatever it is called.
+
+Record the base branch for later: `BASE=$(git rev-parse --abbrev-ref origin/HEAD)`
+(prints e.g. origin/main or origin/develop). If this repo merges features
+somewhere other than its default branch, set BASE to that instead.
+
+Create a feature branch named after the ticket (e.g. abc-123-<short-slug>)
+and implement the ticket according to its acceptance criteria. Commit in
+small increments as you work — an interrupted run keeps whatever is
+committed, and loses whatever is not.
+
+Immediately before pushing, collapse those increments into a single
+commit: `git reset --soft "$BASE"`, then one commit whose message
+covers the whole change and references ABC-123. One commit per PR.
+
+Push the branch and open a Pull Request with `gh pr create --base "${BASE#origin/}"`,
+summarizing what was implemented and how it maps to the ticket's
+acceptance criteria. Reference ABC-123 in the PR body.
+
+Do NOT merge the PR, and do NOT review it or leave review comments on it —
+review is a human's job. Stop once the PR is open.
