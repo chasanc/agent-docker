@@ -12,9 +12,10 @@ if [[ ! -f .env ]]; then
     exit 1
 fi
 
-CREDS_FILE="$HOME/.claude/.credentials.json"
+CLAUDE_DIR="${AGENT_CLAUDE_CONFIG_DIR:-$(grep -E '^AGENT_CLAUDE_CONFIG_DIR=' .env | tail -n1 | cut -d= -f2- || true)}"
+CREDS_FILE="${CLAUDE_DIR:-${CLAUDE_CONFIG_DIR:-$HOME/.claude}}/.credentials.json"
 if [[ ! -f "$CREDS_FILE" ]]; then
-    echo "Missing $CREDS_FILE — run 'claude login' on the host first." >&2
+    echo "Missing $CREDS_FILE — run 'claude login' on the host first (or set AGENT_CLAUDE_CONFIG_DIR)." >&2
     exit 1
 fi
 
